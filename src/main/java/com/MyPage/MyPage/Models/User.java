@@ -18,7 +18,7 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "email")
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @ManyToMany
@@ -31,6 +31,14 @@ public class User {
         this.login = login;
         this.password = password;
         this.email = email;
+    }
+
+    public User(int idUsers, String login, String password, String email, Set<Squad> squads) {
+        this.idUsers = idUsers;
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        this.squads = squads;
     }
 
     public User(){

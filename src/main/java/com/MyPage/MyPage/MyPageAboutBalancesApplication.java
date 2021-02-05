@@ -35,10 +35,10 @@ public class MyPageAboutBalancesApplication implements CommandLineRunner {
 
 
 		 User user1;
-		 user1 = UR.findById(4);
+		 user1 = UR.findById(8);
 
 		 User user2;
-		 user2 = UR.findById(2);
+		 user2 = UR.findById(9);
 
 		 Squad squad;
 		 squad = SR.findById(1);
