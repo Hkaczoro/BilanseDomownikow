@@ -1,4 +1,4 @@
-package com.MyPage.MyPage;
+package com.MyPage.MyPage.Configuration;
 
 import com.MyPage.MyPage.Services.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,8 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
-        //        .loginPage("/login")
-                .usernameParameter("email")
+                .loginPage("/login")
                 .defaultSuccessUrl("/list_users")
                 .permitAll()
                 .and()
