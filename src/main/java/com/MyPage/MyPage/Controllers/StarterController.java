@@ -43,12 +43,6 @@ public class StarterController {
         return "succededRegistration";
     }
 
-    @GetMapping("/list_users")
-    public String listAllUsers(Model model){
-        List<User> listUsers = userRepository.findAll();
-        model.addAttribute("listUsers", listUsers);
-        return "list_users";
-    }
 
     @GetMapping("/error")
     public String errorPage(){

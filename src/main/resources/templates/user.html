@@ -19,12 +19,32 @@
             <th>Login</th>
         </thead>
         <tbody>
-            <tr th:each="user: ${listUsers}">
+            <tr th:each="user: ${user}">
                 <td th:text="${user.idUsers}">User ID</td>
                 <td th:text="${user.email}">email</td>
                 <td th:text="${user.login}">login</td>
             </tr>
         </tbody>
     </table>
+<hr>
+<hr>
+<div>
+    <table>
+        <thead>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Code</th>
+        <th>Details</th>
+        </thead>
+        <tbody>
+            <tr th:each="squads: ${squads}">
+                <td th:text="${squads.idSquad}">ID</td>
+                <td th:text="${squads.name}">Name</td>
+                <td th:text="${squads.code}">Code</td>
+                <td><a th:href="@{/user/{id}(id=${squads.idSquad})}">Show</a></td>
+            </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
