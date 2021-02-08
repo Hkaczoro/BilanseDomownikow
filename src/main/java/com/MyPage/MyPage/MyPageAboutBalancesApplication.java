@@ -34,6 +34,8 @@ public class MyPageAboutBalancesApplication implements CommandLineRunner {
 	public void run(String... args) throws Exception {
 
 
+		/**
+		 *
 		 User user1;
 		 user1 = UR.findById(8);
 
@@ -42,6 +44,7 @@ public class MyPageAboutBalancesApplication implements CommandLineRunner {
 
 		 Squad squad;
 		 squad = SR.findById(1);
+		 */
 		 /**
 		 * Balance balance = new Balance(86.5f, user1, user2, squad);
 		 * 		 BR.save(balance);
@@ -57,6 +60,8 @@ public class MyPageAboutBalancesApplication implements CommandLineRunner {
 		 * 		HR.save(history);
 		 */
 
+		/**
+		 *
 		Set<User> users = new HashSet<>();
 		users.add(user1);
 		users.add(user2);
@@ -74,5 +79,6 @@ public class MyPageAboutBalancesApplication implements CommandLineRunner {
 		System.out.println(user1.getSquads());
 		System.out.println(squad.getUsers());
 
+		 */
 	}
 }

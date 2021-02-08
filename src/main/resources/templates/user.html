@@ -46,5 +46,14 @@
         </tbody>
     </table>
 </div>
+
+<div>
+    <h4>Join to squad</h4>
+    <form th:action="@{/user/addUserToSquad}" method="post">
+        <label>Code:</label>
+        <input type="text" th:value="${squadCode}" name="squadCode">
+        <button type="submit">Join</button>
+    </form>
+</div>
 </body>
 </html>

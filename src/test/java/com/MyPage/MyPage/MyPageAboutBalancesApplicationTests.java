@@ -1,6 +1,8 @@
 package com.MyPage.MyPage;
 
+import com.MyPage.MyPage.Models.Squad;
 import com.MyPage.MyPage.Models.User;
+import com.MyPage.MyPage.Repositories.SquadRepository;
 import com.MyPage.MyPage.Repositories.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,9 @@ class MyPageAboutBalancesApplicationTests {
 	@Autowired
 	private UserRepository userRepository;
 
+	@Autowired
+	private SquadRepository squadRepository;
+
 	@Test
 	void contextLoads() {
 	}
@@ -29,6 +34,14 @@ class MyPageAboutBalancesApplicationTests {
 
 		User user = userRepository.findByEmail(email);
 		assertThat(user).isNotNull();
+	}
+
+	@Test
+	public  void findSquadByCode(){
+		String code = "HeP6vY";
+		Squad squad = squadRepository.findByCode("deded");
+
+		assertThat(squad).isNull();
 	}
 
 }
