@@ -1,6 +1,7 @@
 package com.MyPage.MyPage.Models;
 
 import javax.persistence.*;
+import java.security.SecureRandom;
 import java.util.Set;
 
 @Entity
@@ -32,15 +33,15 @@ public class Squad {
         this.users = users;
     }
 
-    public Squad(int idSquad, String name, String code) {
+    public Squad(int idSquad, String name) {
         this.idSquad = idSquad;
         this.name = name;
-        this.code = code;
+        this.code = generateCode();
     }
 
-    public Squad(String name, String code) {
+    public Squad(String name) {
         this.name = name;
-        this.code = code;
+        this.code = generateCode();
     }
 
     public Squad(){
@@ -77,5 +78,15 @@ public class Squad {
                 ", name='" + name + '\'' +
                 ", code='" + code + '\'' +
                 '}';
+    }
+
+    public String generateCode(){
+        SecureRandom sr = new SecureRandom();
+        String code = "";
+        String characters = "zaqwsxcderfvbgtyhnmjuiklpo1234567890ZAQWSXCDERFVBGTYHNJUIKLOP";
+        for (int i = 0; i <12; i++){
+            code += characters.charAt(sr.nextInt(characters.length()));
+        }
+        return code;
     }
 }

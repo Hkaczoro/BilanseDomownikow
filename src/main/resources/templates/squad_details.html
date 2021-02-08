@@ -6,8 +6,17 @@
 </head>
 <body>
 <div>
-    <h1 th:text="${oneSquad.name}">Squad</h1>
-    <h3 th:text="${oneSquad.code}"></h3>
+    <h1 th:text="${oneSquad.name}" style="text-align: center">Squad</h1>
+
+    <div th:each="users: ${users}">
+        <h3 th:text="${users.login}"></h3>
+
+    </div>
+
+    <div>
+        <h5>Add Balance</h5>
+        
+    </div>
 </div>
 </body>
 </html>

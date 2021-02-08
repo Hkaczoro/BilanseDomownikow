@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
+import java.util.HashSet;
 import java.util.Set;
 
 @Controller
@@ -47,6 +48,9 @@ public class UserController {
 
         if (set.contains(oneSquad)){
             modelAndView.addObject("oneSquad", oneSquad);
+            Set<User> usersInSquad = oneSquad.getUsers();
+            modelAndView.addObject("users", usersInSquad);
+
             return modelAndView;
         }
         else {
@@ -78,6 +82,18 @@ public class UserController {
             userRepository.save(user);
             return "redirect:/user";
         }
+    }
+
+    @PostMapping("/createSquad")
+    public String createSquad(@RequestParam String squadName, Principal principal){
+        String email = principal.getName();
+        User user = userRepository.findByEmail(email);
+        Squad squad = new Squad(squadName);
+        Set<User> setU = new HashSet<>();
+        setU.add(user);
+        squad.setUsers(setU);
+        squadRepository.save(squad);
+        return "redirect:/user";
     }
 
 }
