@@ -66,5 +66,35 @@
 
     </form>
 </div>
+
+<div>
+    BALANCES:
+    <table>
+        <thead>
+        <th>ID</th>
+        <th>value</th>
+        <th>Comment</th>
+        <th>Date</th>
+        <th>Who add</th>
+        <th>Submit</th>
+        </thead>
+        <tbody>
+        <tr th:each="balance: ${balance}">
+            <form>
+                <td th:text="${balance.idBalanceConfirmations}">ID</td>
+                <td th:text="${balance.value}">value</td>
+                <td th:text="${balance.comment}">Comment</td>
+                <td th:text="${balance.date}">Date</td>
+                <td th:text="${balance.user1.login}">Who add</td>
+                <td>
+                    <button>
+
+                    </button>
+                </td>
+            </form>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

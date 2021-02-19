@@ -21,6 +21,9 @@ public class BalanceConfirmation {
     @Column
     private Date date;
 
+    /**
+     * User who add balance
+     */
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "Users_idUsers1")
     private User user1;

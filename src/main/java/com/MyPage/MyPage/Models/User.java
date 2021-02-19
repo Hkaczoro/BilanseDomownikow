@@ -27,6 +27,9 @@ public class User {
                 inverseJoinColumns = @JoinColumn(name = "Squads_idSquads"))
     private Set<Squad> squads;
 
+    @OneToMany(mappedBy = "user2")
+    private Set<BalanceConfirmation> balanceConfirmations;
+
     public User(String login, String password, String email) {
         this.login = login;
         this.password = password;
@@ -39,6 +42,23 @@ public class User {
         this.password = password;
         this.email = email;
         this.squads = squads;
+    }
+
+    public User(int idUsers, String login, String password, String email, Set<Squad> squads, Set<BalanceConfirmation> balanceConfirmations) {
+        this.idUsers = idUsers;
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        this.squads = squads;
+        this.balanceConfirmations = balanceConfirmations;
+    }
+
+    public Set<BalanceConfirmation> getBalanceConfirmations() {
+        return balanceConfirmations;
+    }
+
+    public void setBalanceConfirmations(Set<BalanceConfirmation> balanceConfirmations) {
+        this.balanceConfirmations = balanceConfirmations;
     }
 
     public User(){
@@ -94,4 +114,5 @@ public class User {
                 ", email='" + email + '\'' +
                 '}';
     }
+
 }

@@ -1,7 +1,9 @@
 package com.MyPage.MyPage;
 
+import com.MyPage.MyPage.Models.BalanceConfirmation;
 import com.MyPage.MyPage.Models.Squad;
 import com.MyPage.MyPage.Models.User;
+import com.MyPage.MyPage.Repositories.BalanceConfirmationRepository;
 import com.MyPage.MyPage.Repositories.SquadRepository;
 import com.MyPage.MyPage.Repositories.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -13,6 +15,9 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 
+import java.io.Serializable;
+import java.util.Set;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -23,6 +28,9 @@ class MyPageAboutBalancesApplicationTests {
 
 	@Autowired
 	private SquadRepository squadRepository;
+
+	@Autowired
+	private BalanceConfirmationRepository balanceConfirmationRepository;
 
 	@Test
 	void contextLoads() {
@@ -43,5 +51,6 @@ class MyPageAboutBalancesApplicationTests {
 
 		assertThat(squad).isNull();
 	}
+
 
 }

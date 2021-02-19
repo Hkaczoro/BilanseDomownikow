@@ -12,11 +12,16 @@
         <h3 th:text="${users.login}"></h3>
 
     </div>
-
-    <div>
-        <h5>Add Balance</h5>
-        
-    </div>
+<hr>
+    Add balance, choose users:
+    <form method="post" th:action="@{/user/addBalance}" th:object="${users}">
+        <ul>
+            <li th:each="user, stat: ${users}"><input type="checkbox" th:name="list" th:value="${user.idUsers}"><label th:text="${user.login}"></label></li>
+        </ul>
+        <label>Value:</label><input type="text" th:value="${inputValue}" name="inputValue">
+        <label>Comment:</label><input type="text" th:value="${inputComment}" name="inputComment">
+        <button type="submit">ADD</button>
+    </form>
 </div>
 </body>
 </html>

@@ -1,5 +1,7 @@
 package com.MyPage.MyPage.Models;
 
+import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
+
 import javax.persistence.*;
 import java.security.SecureRandom;
 import java.util.Set;
