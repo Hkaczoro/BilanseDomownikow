@@ -8,11 +8,15 @@ public class Balance {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "idBalances")
     private int idBalance;
 
     @Column(name = "value")
     private float value;
 
+    /**
+     * User who add balance
+     */
     @ManyToOne
     @JoinColumn(name = "Users_idUsers1")
     private User user1;
@@ -34,6 +38,14 @@ public class Balance {
 
     public Balance(){
 
+    }
+
+    public int getIdBalance() {
+        return idBalance;
+    }
+
+    public void setIdBalance(int idBalance) {
+        this.idBalance = idBalance;
     }
 
     public float getValue() {
@@ -66,5 +78,16 @@ public class Balance {
 
     public void setSquad(Squad squad) {
         this.squad = squad;
+    }
+
+    @Override
+    public String toString() {
+        return "Balance{" +
+                "idBalance=" + idBalance +
+                ", value=" + value +
+                ", user1=" + user1 +
+                ", user2=" + user2 +
+                ", squad=" + squad +
+                '}';
     }
 }

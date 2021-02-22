@@ -12,7 +12,22 @@
         <h3 th:text="${users.login}"></h3>
 
     </div>
-<hr>
+    <hr><hr>
+    <table>
+        <thead>
+            <th>ID</th>
+            <th>User</th>
+            <th>Value</th>
+        </thead>
+        <tbody>
+            <tr th:each="balances: ${balances}">
+                <td th:text="${balances.idBalance}">ID</td>
+                <td th:text="${balances.user2.login}">User</td>
+                <td th:text="${balances.value}">Value</td>
+            </tr>
+        </tbody>
+    </table>
+    <hr><hr>
     Add balance, choose users:
     <form method="post" th:action="@{/user/addBalance}" th:object="${users}">
         <ul>

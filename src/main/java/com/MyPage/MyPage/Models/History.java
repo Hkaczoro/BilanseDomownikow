@@ -34,13 +34,17 @@ public class History {
     @JoinColumn(name = "Squads_idSquads")
     private Squad squad;
 
-    public History(String comment, float value, Date date, User user1, User user2, Squad squad) {
+    @Column
+    private String state;
+
+    public History(String comment, float value, Date date, User user1, User user2, Squad squad, String state) {
         this.comment = comment;
         this.value = value;
         this.date = date;
         this.user1 = user1;
         this.user2 = user2;
         this.squad = squad;
+        this.state = state;
     }
 
     public History(){
@@ -102,4 +106,14 @@ public class History {
     public void setSquad(Squad squad) {
         this.squad = squad;
     }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+
 }

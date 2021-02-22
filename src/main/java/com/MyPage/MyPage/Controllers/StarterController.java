@@ -35,12 +35,20 @@ public class StarterController {
     }
 
     @PostMapping("/registerProcces")
-    public String succededRegistration(User user){
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        String encodePassword = encoder.encode(user.getPassword());
-        user.setPassword(encodePassword);
-        userRepository.save(user);
-        return "succededRegistration";
+    public String succededRegistration(User user, Model model){
+        if (userRepository.findByEmail(user.getEmail()) == null){
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            String encodePassword = encoder.encode(user.getPassword());
+            user.setPassword(encodePassword);
+            userRepository.save(user);
+            return "succededRegistration";
+        }
+        else {
+            String exist = "The email is already used.";
+            model.addAttribute("exist", exist);
+            return "register";
+        }
+
     }
 
 

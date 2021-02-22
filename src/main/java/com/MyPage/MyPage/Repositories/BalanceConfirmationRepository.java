@@ -11,4 +11,6 @@ import java.util.Set;
 @Repository
 public interface BalanceConfirmationRepository extends CrudRepository<BalanceConfirmation, Integer> {
 
+    BalanceConfirmation findById(int id);
+
 }

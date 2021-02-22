@@ -80,16 +80,15 @@
         </thead>
         <tbody>
         <tr th:each="balance: ${balance}">
-            <form>
+            <form th:action="@{/user/acceptOrDelete}" method="post">
                 <td th:text="${balance.idBalanceConfirmations}">ID</td>
                 <td th:text="${balance.value}">value</td>
                 <td th:text="${balance.comment}">Comment</td>
                 <td th:text="${balance.date}">Date</td>
                 <td th:text="${balance.user1.login}">Who add</td>
                 <td>
-                    <button>
-
-                    </button>
+                    <button type="submit" th:name="accept" th:value="${balance.idBalanceConfirmations}">Accept</button>
+                    <button type="submit" th:name="delete" th:value="${balance.idBalanceConfirmations}">Delete</button>
                 </td>
             </form>
         </tr>

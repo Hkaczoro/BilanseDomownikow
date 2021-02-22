@@ -8,4 +8,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 
 @Repository
 public interface HistoryRepository extends CrudRepository<History, Integer> {
+
+    History findById(int id);
+
 }

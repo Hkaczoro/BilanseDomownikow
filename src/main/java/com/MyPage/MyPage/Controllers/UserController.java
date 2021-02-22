@@ -1,11 +1,7 @@
 package com.MyPage.MyPage.Controllers;
 
-import com.MyPage.MyPage.Models.BalanceConfirmation;
-import com.MyPage.MyPage.Models.Squad;
-import com.MyPage.MyPage.Models.User;
-import com.MyPage.MyPage.Repositories.BalanceConfirmationRepository;
-import com.MyPage.MyPage.Repositories.SquadRepository;
-import com.MyPage.MyPage.Repositories.UserRepository;
+import com.MyPage.MyPage.Models.*;
+import com.MyPage.MyPage.Repositories.*;
 import com.MyPage.MyPage.Services.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,6 +27,12 @@ public class UserController {
 
     @Autowired
     private BalanceConfirmationRepository balanceConfirmationRepository;
+
+    @Autowired
+    private BalanceRepository balanceRepository;
+
+    @Autowired
+    private HistoryRepository historyRepository;
 
     private int groupId;
 
@@ -60,6 +62,9 @@ public class UserController {
             modelAndView.addObject("oneSquad", oneSquad);
             Set<User> usersInSquad = oneSquad.getUsers();
             modelAndView.addObject("users", usersInSquad);
+
+            Set<Balance> balances = balanceRepository.findByUser1AndSquad(user, oneSquad);
+            modelAndView.addObject("balances", balances);
 
             return modelAndView;
         }
@@ -117,12 +122,69 @@ public class UserController {
 
             for (int i = 0; i < list.length; i++){
 
-                BalanceConfirmation balanceConfirmation = new BalanceConfirmation(trueValue, inputComment, new Date(), loogedUser, userRepository.findById(list[i]));
-                balanceConfirmationRepository.save(balanceConfirmation);
+                if (!loogedUser.getEmail().equals(userRepository.findById(list[i]).getEmail())){
+
+                    History history1 = new History(inputComment, trueValue, new Date(), loogedUser, userRepository.findById(list[i]), squadRepository.findById(groupId), "In Progress");
+                    historyRepository.save(history1);
+
+                    BalanceConfirmation balanceConfirmation = new BalanceConfirmation(trueValue, inputComment, new Date(), loogedUser, userRepository.findById(list[i]), squadRepository.findById(groupId), history1);
+                    balanceConfirmationRepository.save(balanceConfirmation);
+                }
+
             }
         }
 
         return "redirect:/user/" + groupId;
+    }
+
+    @PostMapping("/acceptOrDelete")
+    public String acceptOrDeleteBalance(@RequestParam(value = "accept", required = false) String accept, @RequestParam(value = "delete", required = false) String delete, Model model, Principal principal){
+
+
+        if (accept != null) {
+            int id = Integer.parseInt(accept);
+            BalanceConfirmation balanceConfirmation = balanceConfirmationRepository.findById(id);
+            History history = historyRepository.findById(balanceConfirmation.getHistory().getIdHistory());
+
+            float balanceValue = balanceConfirmation.getValue();
+
+            Balance firstUsersBalance = balanceRepository.findBySquadAndUser1AndUser2(balanceConfirmation.getSquad(), balanceConfirmation.getUser1(), balanceConfirmation.getUser2());
+            Balance secondUsersBalance = balanceRepository.findBySquadAndUser1AndUser2(balanceConfirmation.getSquad(), balanceConfirmation.getUser2(), balanceConfirmation.getUser1());
+
+            System.out.println(firstUsersBalance);
+
+            if (firstUsersBalance != null){
+                float presentValue = firstUsersBalance.getValue();
+                presentValue -= balanceValue;
+                firstUsersBalance.setValue(presentValue);
+                float presentValue2 = secondUsersBalance.getValue();
+                presentValue2 += balanceValue;
+                secondUsersBalance.setValue(presentValue2);
+                balanceRepository.save(firstUsersBalance);
+                balanceRepository.save(secondUsersBalance);
+            }
+            else {
+                Balance balance1 = new Balance(-balanceValue, balanceConfirmation.getUser1(), balanceConfirmation.getUser2(), balanceConfirmation.getSquad());
+                Balance balance2 = new Balance(balanceValue, balanceConfirmation.getUser2(), balanceConfirmation.getUser1(), balanceConfirmation.getSquad());
+                balanceRepository.save(balance1);
+                balanceRepository.save(balance2);
+
+            }
+            history.setState("accepted");
+            historyRepository.save(history);
+            balanceConfirmationRepository.delete(balanceConfirmation);
+        }
+        else if (delete != null){
+            int id = Integer.parseInt(delete);
+            BalanceConfirmation balanceConfirmation = balanceConfirmationRepository.findById(id);
+            History history = historyRepository.findById(balanceConfirmation.getHistory().getIdHistory());
+
+            balanceConfirmationRepository.delete(balanceConfirmation);
+            history.setState("rejected");
+            historyRepository.save(history);
+        }
+
+        return "redirect:/user";
     }
 
 }

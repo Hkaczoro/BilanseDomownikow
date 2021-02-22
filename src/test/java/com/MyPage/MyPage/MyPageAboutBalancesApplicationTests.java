@@ -1,9 +1,11 @@
 package com.MyPage.MyPage;
 
+import com.MyPage.MyPage.Models.Balance;
 import com.MyPage.MyPage.Models.BalanceConfirmation;
 import com.MyPage.MyPage.Models.Squad;
 import com.MyPage.MyPage.Models.User;
 import com.MyPage.MyPage.Repositories.BalanceConfirmationRepository;
+import com.MyPage.MyPage.Repositories.BalanceRepository;
 import com.MyPage.MyPage.Repositories.SquadRepository;
 import com.MyPage.MyPage.Repositories.UserRepository;
 import org.junit.jupiter.api.Test;
@@ -32,6 +34,9 @@ class MyPageAboutBalancesApplicationTests {
 	@Autowired
 	private BalanceConfirmationRepository balanceConfirmationRepository;
 
+	@Autowired
+	private BalanceRepository balanceRepository;
+
 	@Test
 	void contextLoads() {
 	}
@@ -52,5 +57,9 @@ class MyPageAboutBalancesApplicationTests {
 		assertThat(squad).isNull();
 	}
 
+	@Test
+	public void findBalance(){
+
+	}
 
 }

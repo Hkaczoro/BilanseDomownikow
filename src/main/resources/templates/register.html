@@ -9,6 +9,9 @@
 
 <div>
     <form th:action="@{/registerProcces}" method="post" th:object="${user}">
+        <div th:if="${exist != null}" class="alert alert-error">
+            <p th:text="${exist}"></p>
+        </div>
         <div>
             <label>Login</label>
             <input type="text" th:field="*{login}" required minlength="4" maxlength="15">

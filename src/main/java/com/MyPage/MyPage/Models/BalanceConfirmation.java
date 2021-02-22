@@ -32,6 +32,14 @@ public class BalanceConfirmation {
     @JoinColumn(name = "Users_idUsers2")
     private User user2;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Squads_idSquads")
+    private Squad squad;
+
+    @OneToOne
+    @JoinColumn(name = "History_idHistory", referencedColumnName = "idHistory")
+    private History history;
+
     public int getIdBalanceConfirmations() {
         return idBalanceConfirmations;
     }
@@ -84,15 +92,33 @@ public class BalanceConfirmation {
         this.idBalanceConfirmations = idBalanceConfirmations;
     }
 
-    public BalanceConfirmation(float value, String comment, Date date, User user1, User user2) {
+    public Squad getSquad() {
+        return squad;
+    }
+
+    public void setSquad(Squad squad) {
+        this.squad = squad;
+    }
+
+    public BalanceConfirmation(float value, String comment, Date date, User user1, User user2, Squad squad, History history ) {
         this.value = value;
         this.comment = comment;
         this.date = date;
         this.user1 = user1;
         this.user2 = user2;
+        this.squad = squad;
+        this.history = history;
     }
 
     public BalanceConfirmation(){
 
+    }
+
+    public History getHistory() {
+        return history;
+    }
+
+    public void setHistory(History history) {
+        this.history = history;
     }
 }
