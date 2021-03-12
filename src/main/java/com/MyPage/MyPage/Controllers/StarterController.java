@@ -19,19 +19,14 @@ public class StarterController {
     private UserRepository userRepository;
 
     @GetMapping("/")
-    public String getStartingPage(){
+    public String index(){
         return "index";
     }
 
     @GetMapping("/login")
-    public String getLoginPage(){
-        return "login";
-    }
-
-    @GetMapping("/register")
-    public String showRegisterForm(Model model){
+    public String getStartingPage(Model model){
         model.addAttribute("user", new User());
-        return "register";
+        return "login";
     }
 
     @PostMapping("/registerProcces")
@@ -46,7 +41,7 @@ public class StarterController {
         else {
             String exist = "The email is already used.";
             model.addAttribute("exist", exist);
-            return "register";
+            return "login";
         }
 
     }

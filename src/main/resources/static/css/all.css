@@ -1,0 +1,32 @@
+html, body {
+    background-color:#e4e4e4;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+}
+
+.container {
+    background-color: rgb(185, 185, 185);
+    border-left: 5px solid #02047a;
+    height: 100vh;
+    border-radius: 1%;
+    box-shadow: 10px 5px 7px grey;
+}
+
+label {
+    text-transform: uppercase;
+}
+
+input {
+    margin-bottom: 15px;
+}
+
+legend {
+    text-transform: uppercase;
+    text-align: center;
+}
+
+button {
+    text-transform: uppercase;
+    width: 100%;
+}
+

@@ -38,7 +38,7 @@ public class UserController {
 
 
     @GetMapping()
-    public String listAllUsers(Model model, Principal principal){
+    public String user(Model model, Principal principal){
         User listUsers = userRepository.findByEmail(principal.getName());
         model.addAttribute("user", listUsers);
         Set<Squad> squads = listUsers.getSquads();
@@ -112,29 +112,37 @@ public class UserController {
     }
 
     @PostMapping("/addBalance")
-    public String addBalance(@RequestParam(value = "list", required = false) int[] list, @RequestParam(value = "inputValue", required = false) String inputValue, @RequestParam(required = false) String inputComment, Model model, Principal principal){
+    public String addBalance(@RequestParam(value = "list", required = false) int[] list,
+                             @RequestParam(value = "inputValue") String inputValue,
+                             @RequestParam(required = false) String inputComment,
+                             Model model,
+                             Principal principal) {
+        try {
+            User loogedUser = userRepository.findByEmail(principal.getName());
+            float f = Float.parseFloat(inputValue);
 
-        User loogedUser = userRepository.findByEmail(principal.getName());
-        float f = Float.parseFloat(inputValue);
+            if (list.length != 0) {
+                float trueValue = f / list.length;
 
-        if (list.length != 0){
-            float trueValue = f/list.length;
+                for (int i = 0; i < list.length; i++) {
 
-            for (int i = 0; i < list.length; i++){
+                    if (!loogedUser.getEmail().equals(userRepository.findById(list[i]).getEmail())) {
 
-                if (!loogedUser.getEmail().equals(userRepository.findById(list[i]).getEmail())){
+                        History history1 = new History(inputComment, trueValue, new Date(), loogedUser, userRepository.findById(list[i]), squadRepository.findById(groupId), "In Progress");
+                        historyRepository.save(history1);
 
-                    History history1 = new History(inputComment, trueValue, new Date(), loogedUser, userRepository.findById(list[i]), squadRepository.findById(groupId), "In Progress");
-                    historyRepository.save(history1);
-
-                    BalanceConfirmation balanceConfirmation = new BalanceConfirmation(trueValue, inputComment, new Date(), loogedUser, userRepository.findById(list[i]), squadRepository.findById(groupId), history1);
-                    balanceConfirmationRepository.save(balanceConfirmation);
+                        BalanceConfirmation balanceConfirmation = new BalanceConfirmation(trueValue, inputComment, new Date(), loogedUser, userRepository.findById(list[i]), squadRepository.findById(groupId), history1);
+                        balanceConfirmationRepository.save(balanceConfirmation);
+                    }
                 }
-
             }
+            return "redirect:/user/" + groupId;
+        } catch (NumberFormatException numberFormatException) {
+            String format = "Check if the value is correct.";
+            model.addAttribute("wrongFormat", format);
+            System.out.println(format);
+            return "redirect:/user/" + groupId;
         }
-
-        return "redirect:/user/" + groupId;
     }
 
     @PostMapping("/acceptOrDelete")

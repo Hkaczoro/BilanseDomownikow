@@ -3,97 +3,141 @@
 <head>
     <meta charset="UTF-8">
     <title>List users</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/user.css" type="text/css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
-<div style="color: red">
-    <!-- From CustomUserDetails -->
-    <form th:action="@{/logout}" method="post">
-        Hi <b>[[${#request.userPrincipal.principal.Login}]]</b>
-        <input type="submit" value="Sign out">
-    </form>
-</div>
-    <table>
-        <thead>
-            <th>ID</th>
-            <th>E-mail</th>
-            <th>Login</th>
-        </thead>
-        <tbody>
-            <tr th:each="user: ${user}">
-                <td th:text="${user.idUsers}">User ID</td>
-                <td th:text="${user.email}">email</td>
-                <td th:text="${user.login}">login</td>
-            </tr>
-        </tbody>
-    </table>
-<hr>
-<hr>
-<div>
-    <table>
-        <thead>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Code</th>
-        <th>Details</th>
-        </thead>
-        <tbody>
-            <tr th:each="squads: ${squads}">
-                <td th:text="${squads.idSquad}">ID</td>
-                <td th:text="${squads.name}">Name</td>
-                <td th:text="${squads.code}">Code</td>
-                <td><a th:href="@{/user/{id}(id=${squads.idSquad})}">Show</a></td>
-            </tr>
-        </tbody>
-    </table>
+<nav class="navbar navbar-dark bg-dark navbar-expand-xs">
+    <div class="container">
+        <a href="#" class="navbar-brand mb-0 h1 mr-auto">PageName</a>
+        <form th:action="@{/logout}" method="post" class="d-flex ml-auto">
+            <a class="nav-link" href="#">[[${#request.userPrincipal.principal.Login}]]</a>
+            <button type="submit" value="Sign out" class="btn btn-info">Sign out</button>
+        </form>
+    </div>
+</nav>
+<div class="all">
+    <div class="container">
+        <h1>
+            Your Squads:
+        </h1>
+        <div>
+            <div th:each="squads: ${squads}" class="squad">
+                <div class="row align-item-start">
+                    <div class="col">
+                        <h4 class="name">Name</h4>
+                    </div>
+                    <div class="col">
+                        <h4 class="code">Code</h4>
+                    </div>
+                    <div class="col">
+                        <h4 class="details">Details</h4>
+                    </div>
+                </div>
+                <div class="row align-item-end">
+                    <div class="col">
+                        <h6 th:text="${squads.name}" class="name">Name</h6>
+                    </div>
+                    <div class="col">
+                        <h6 th:text="${squads.code}" class="code">Code</h6>
+                    </div>
+                    <div class="col">
+                        <h6 class="details"><a th:href="@{/user/{id}(id=${squads.idSquad})}">Show</a></h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <h1>
+            Balances:
+        </h1>
+
+        <div class="balances">
+            <div th:each="balance: ${balance}" class="balance">
+                <form th:action="@{/user/acceptOrDelete}" method="post">
+                    <div class="row align-item-start">
+                        <div class="col">
+                            <h4>From</h4>
+                        </div>
+                        <div class="col">
+                            <h4>Value</h4>
+                        </div>
+                        <div class="col">
+                            <h4>Comment</h4>
+                        </div>
+                        <div class="col">
+                            <h4>Date</h4>
+                        </div>
+                        <div class="col">
+                            <h4>Submit</h4>
+                        </div>
+                    </div>
+                    <div class="row align-item-end">
+                        <div class="col">
+                            <h6 th:text="${balance.user1.login}">From</h6>
+                        </div>
+                        <div class="col">
+                            <h6 th:text="${balance.value}">Value</h6>
+                        </div>
+                        <div class="col">
+                            <h6 th:text="${balance.comment}">Comment</h6>
+                        </div>
+                        <div class="col">
+                            <h6 th:text="${balance.date}">Date</h6>
+                        </div>
+                        <div class="col">
+                            <button type="submit" th:name="accept" th:value="${balance.idBalanceConfirmations}" class="btn btn-success">Accept</button>
+                            <button type="submit" th:name="delete" th:value="${balance.idBalanceConfirmations}" class="btn btn-danger">Delete</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="add-join">
+            <div class="row">
+                <div class="col-sm-12 col-md-6">
+                    <h4>Join to squad</h4>
+                    <form th:action="@{/user/addUserToSquad}" method="post">
+                        <!--
+                        <label>Code:</label>
+                        <input type="text" th:value="${squadCode}" name="squadCode">
+                        <button type="submit" class="btn btn-success">Join</button>
+                        -->
+                        <div class="input-group mb-3">
+                            <input type="text" th:value="${squadCode}" class="form-control" placeholder="Code" name="squadCode" aria-describedby="button-addon2">
+                            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Button</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-12 col-md-6">
+                    <h4>Add squad</h4>
+                    <form th:action="@{/user/createSquad}" method="post">
+                        <!--
+                        <label>Name:</label>
+                        <input type="text" th:value="${squadName}" name="squadName">
+                        <button type="submit" class="btn btn-success">Create</button>
+                        -->
+                        <div class="input-group mb-3">
+                            <input type="text" th:value="${squadName}" class="form-control" placeholder="Name" name="squadName" aria-describedby="button-addon2">
+                            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Button</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div>
-    <h4>Join to squad</h4>
-    <form th:action="@{/user/addUserToSquad}" method="post">
-        <label>Code:</label>
-        <input type="text" th:value="${squadCode}" name="squadCode">
-        <button type="submit">Join</button>
-    </form>
-</div>
-<hr>
-<hr>
-<div>
-    <h4>Add squad</h4>
-    <form th:action="@{/user/createSquad}" method="post">
-        <label>Name:</label>
-        <input type="text" th:value="${squadName}" name="squadName">
-        <button type="submit">Create</button>
 
-    </form>
-</div>
 
-<div>
-    BALANCES:
-    <table>
-        <thead>
-        <th>ID</th>
-        <th>value</th>
-        <th>Comment</th>
-        <th>Date</th>
-        <th>Who add</th>
-        <th>Submit</th>
-        </thead>
-        <tbody>
-        <tr th:each="balance: ${balance}">
-            <form th:action="@{/user/acceptOrDelete}" method="post">
-                <td th:text="${balance.idBalanceConfirmations}">ID</td>
-                <td th:text="${balance.value}">value</td>
-                <td th:text="${balance.comment}">Comment</td>
-                <td th:text="${balance.date}">Date</td>
-                <td th:text="${balance.user1.login}">Who add</td>
-                <td>
-                    <button type="submit" th:name="accept" th:value="${balance.idBalanceConfirmations}">Accept</button>
-                    <button type="submit" th:name="delete" th:value="${balance.idBalanceConfirmations}">Delete</button>
-                </td>
-            </form>
-        </tr>
-        </tbody>
-    </table>
-</div>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
 </body>
 </html>

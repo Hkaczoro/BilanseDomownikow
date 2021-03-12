@@ -33,9 +33,12 @@
         <ul>
             <li th:each="user, stat: ${users}"><input type="checkbox" th:name="list" th:value="${user.idUsers}"><label th:text="${user.login}"></label></li>
         </ul>
-        <label>Value:</label><input type="text" th:value="${inputValue}" name="inputValue">
+        <div th:if="${wrongFormat != null}" class="alert alert-error">
+            <p th:text="${wrongFormat}"></p>
+        </div>
+        <label>Value:</label><input type="text" th:value="${inputValue}" name="inputValue" title="Check if the value is correct.">
         <label>Comment:</label><input type="text" th:value="${inputComment}" name="inputComment">
-        <button type="submit">ADD</button>
+        <button type="submit" pattern="[0-9]{10}">ADD</button>
     </form>
 </div>
 </body>
