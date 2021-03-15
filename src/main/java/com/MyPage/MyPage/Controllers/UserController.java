@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
+import java.text.DecimalFormat;
 import java.util.*;
 
 @Controller
@@ -35,6 +36,8 @@ public class UserController {
     private HistoryRepository historyRepository;
 
     private int groupId;
+
+    private static DecimalFormat df = new DecimalFormat("0.00");
 
 
     @GetMapping()
@@ -64,6 +67,11 @@ public class UserController {
             modelAndView.addObject("users", usersInSquad);
 
             Set<Balance> balances = balanceRepository.findByUser1AndSquad(user, oneSquad);
+            for(Balance b : balances){
+                float f = b.getValue();
+                float roundedFloat = (float) (Math.round(f * 100.0) / 100.0);
+                b.setValue(roundedFloat);
+            }
             modelAndView.addObject("balances", balances);
 
             return modelAndView;
