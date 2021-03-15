@@ -12,10 +12,10 @@
 <body>
 <nav class="navbar navbar-dark bg-dark navbar-expand-xs">
     <div class="container">
-        <a href="#" class="navbar-brand mb-0 h1 mr-auto">PageName</a>
+        <a href="#" class="navbar-brand mb-0 h1 mr-auto">MatesFunds</a>
         <form th:action="@{/logout}" method="post" class="d-flex ml-auto">
             <a class="nav-link" href="#">[[${#request.userPrincipal.principal.Login}]]</a>
-            <button type="submit" value="Sign out" class="btn btn-info">Sign out</button>
+            <button type="submit" value="Sign out" class="btn btn-info">Wyloguj się</button>
         </form>
     </div>
 </nav>
@@ -26,11 +26,11 @@
         <div class="row justify-content-start">
             <div class="col-4">
                 <button type="submit" class="btn btn-outline-secondary return">
-                    <i class="fas fa-angle-left"></i> Return
+                    <i class="fas fa-angle-left"></i> Wróc
                 </button>
             </div>
             <div class="col-4">
-                <h1 th:text="${oneSquad.name}" style="text-align: center">Squad</h1>
+                <h1 th:text="${oneSquad.name}" style="text-align: center">Grupa</h1>
             </div>
         </div>
         </form>
@@ -39,8 +39,8 @@
         <table class="table table-striped">
             <thead class="table-dark">
             <tr>
-                <th scope="col">User</th>
-                <th scope="col" class="right">Value</th>
+                <th scope="col">Użytkownik</th>
+                <th scope="col" class="right">Bilans</th>
             </tr>
             </thead>
             <tbody>
@@ -52,22 +52,22 @@
         </table>
         <hr><hr>
 
-        <h1>Add balance:</h1>
+        <h1>Dodaj bilans:</h1>
 
         <form method="post" th:action="@{/user/addBalance}" th:object="${users}">
             <ul class="list-group">
-                <li th:each="user, stat: ${users}" class="list-group-item"><input type="checkbox" th:name="list" th:value="${user.idUsers}" class="form-check-input"> <label th:text="${user.login}" class="form-check-label"></label></h6></li>
+                <li th:each="user, stat: ${users}" class="list-group-item"><input type="checkbox" th:name="list" th:value="${user.idUsers}" class="form-check-input"> <label th:text="${user.login}" class="form-check-label"></label></li>
             </ul>
             <div th:if="${wrongFormat != null}" class="alert alert-error">
                 <p th:text="${wrongFormat}"></p>
             </div>
             <br>
             <div class="input-group mb-3">
-                <input type="text" th:value="${inputValue}" name="inputValue" title="Check if the value is correct." placeholder="Value" class="form-control">
+                <input type="text" th:value="${inputValue}" name="inputValue" title="Check if the value is correct." placeholder="Wartość" class="form-control">
             </div>
             <div class="input-group mb-3">
-                <input type="text" th:value="${inputComment}" name="inputComment" placeholder="Comment" class="form-control">
-                <button type="submit" class="btn btn-outline-secondary">ADD</button>
+                <input type="text" th:value="${inputComment}" name="inputComment" placeholder="Komentarz" class="form-control">
+                <button type="submit" class="btn btn-outline-secondary">Dodaj</button>
             </div>
         </form>
     </div>

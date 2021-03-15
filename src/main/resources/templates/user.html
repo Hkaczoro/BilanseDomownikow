@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>List users</title>
+    <title>User</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/user.css" type="text/css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -11,29 +11,29 @@
 <body>
 <nav class="navbar navbar-dark bg-dark navbar-expand-xs">
     <div class="container">
-        <a href="#" class="navbar-brand mb-0 h1 mr-auto">PageName</a>
+        <a href="#" class="navbar-brand mb-0 h1 mr-auto">MatesFunds</a>
         <form th:action="@{/logout}" method="post" class="d-flex ml-auto">
             <a class="nav-link" href="#">[[${#request.userPrincipal.principal.Login}]]</a>
-            <button type="submit" value="Sign out" class="btn btn-info">Sign out</button>
+            <button type="submit" value="Sign out" class="btn btn-info">Wyloguj się</button>
         </form>
     </div>
 </nav>
 <div class="all">
     <div class="container">
         <h1>
-            Your Squads:
+            Twoje grupy:
         </h1>
         <div>
             <div th:each="squads: ${squads}" class="squad">
                 <div class="row align-item-start">
                     <div class="col">
-                        <h4 class="name">Name</h4>
+                        <h4 class="name">Nazwa</h4>
                     </div>
                     <div class="col">
-                        <h4 class="code">Code</h4>
+                        <h4 class="code">Kod</h4>
                     </div>
                     <div class="col">
-                        <h4 class="details">Details</h4>
+                        <h4 class="details">Szczegóły</h4>
                     </div>
                 </div>
                 <div class="row align-item-end">
@@ -53,7 +53,7 @@
         <hr>
 
         <h1>
-            Balances:
+            Oczekujące:
         </h1>
 
         <div class="balances">
@@ -61,19 +61,19 @@
                 <form th:action="@{/user/acceptOrDelete}" method="post">
                     <div class="row align-item-start">
                         <div class="col">
-                            <h4>From</h4>
+                            <h4>Od</h4>
                         </div>
                         <div class="col">
-                            <h4>Value</h4>
+                            <h4>Wartość</h4>
                         </div>
                         <div class="col">
-                            <h4>Comment</h4>
+                            <h4>Komentarz</h4>
                         </div>
                         <div class="col">
-                            <h4>Date</h4>
+                            <h4>Data</h4>
                         </div>
                         <div class="col">
-                            <h4>Submit</h4>
+                            <h4>Podsumowanie</h4>
                         </div>
                     </div>
                     <div class="row align-item-end">
@@ -90,8 +90,8 @@
                             <h6 th:text="${balance.date}">Date</h6>
                         </div>
                         <div class="col">
-                            <button type="submit" th:name="accept" th:value="${balance.idBalanceConfirmations}" class="btn btn-success">Accept</button>
-                            <button type="submit" th:name="delete" th:value="${balance.idBalanceConfirmations}" class="btn btn-danger">Delete</button>
+                            <button type="submit" th:name="accept" th:value="${balance.idBalanceConfirmations}" class="btn btn-success">Akceptuj</button>
+                            <button type="submit" th:name="delete" th:value="${balance.idBalanceConfirmations}" class="btn btn-danger">Usuń</button>
                         </div>
                     </div>
                 </form>
@@ -103,7 +103,7 @@
         <div class="add-join">
             <div class="row">
                 <div class="col-sm-12 col-md-6">
-                    <h4>Join to squad</h4>
+                    <h4>Dołącz do składu:</h4>
                     <form th:action="@{/user/addUserToSquad}" method="post">
                         <!--
                         <label>Code:</label>
@@ -112,12 +112,12 @@
                         -->
                         <div class="input-group mb-3">
                             <input type="text" th:value="${squadCode}" class="form-control" placeholder="Code" name="squadCode" aria-describedby="button-addon2">
-                            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Button</button>
+                            <button class="btn btn-outline-secondary" type="submit">Dołącz</button>
                         </div>
                     </form>
                 </div>
                 <div class="col-sm-12 col-md-6">
-                    <h4>Add squad</h4>
+                    <h4>Dodaj grupę:</h4>
                     <form th:action="@{/user/createSquad}" method="post">
                         <!--
                         <label>Name:</label>
@@ -126,7 +126,7 @@
                         -->
                         <div class="input-group mb-3">
                             <input type="text" th:value="${squadName}" class="form-control" placeholder="Name" name="squadName" aria-describedby="button-addon2">
-                            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Button</button>
+                            <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Dodaj</button>
                         </div>
                     </form>
                 </div>

@@ -128,8 +128,6 @@ public class UserController {
         try {
             User loogedUser = userRepository.findByEmail(principal.getName());
             float f = Float.parseFloat(inputValue);
-            System.out.println(f);
-            System.out.println(list.length);
 
             if (list.length != 0) {
                 float trueValue = f / list.length;
@@ -150,7 +148,6 @@ public class UserController {
         } catch (NumberFormatException numberFormatException) {
             String format = "Check if the value is correct.";
             model.addAttribute("wrongFormat", format);
-            System.out.println(format);
             return "redirect:/user/" + groupId;
         }
     }
@@ -169,14 +166,13 @@ public class UserController {
             Balance firstUsersBalance = balanceRepository.findBySquadAndUser1AndUser2(balanceConfirmation.getSquad(), balanceConfirmation.getUser1(), balanceConfirmation.getUser2());
             Balance secondUsersBalance = balanceRepository.findBySquadAndUser1AndUser2(balanceConfirmation.getSquad(), balanceConfirmation.getUser2(), balanceConfirmation.getUser1());
 
-            System.out.println(firstUsersBalance);
 
             if (firstUsersBalance != null){
                 float presentValue = firstUsersBalance.getValue();
-                presentValue -= balanceValue;
+                presentValue += balanceValue;
                 firstUsersBalance.setValue(presentValue);
                 float presentValue2 = secondUsersBalance.getValue();
-                presentValue2 += balanceValue;
+                presentValue2 -= balanceValue;
                 secondUsersBalance.setValue(presentValue2);
                 balanceRepository.save(firstUsersBalance);
                 balanceRepository.save(secondUsersBalance);

@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Starting page</title>
+    <title>Login or Sign up</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <link rel="stylesheet" href="/css/all.css" type="text/css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
@@ -16,7 +16,7 @@
                 <div class="login">
                     <form name="login" th:action="@{/login}" method="post">
                         <fieldset>
-                            <legend>Login</legend>
+                            <legend>Logowanie</legend>
                             <!--
     <div th:if="${param.logout}" class="alert alert-succes">
                                 You have been log out.
@@ -25,13 +25,13 @@
 
                             <label for="username" class="form-label">E-mail:</label>
                             <input type="text" id="username" name="username" class="form-control form-control-sm">
-                            <label for="password" class="form-label">Password:</label>
+                            <label for="password" class="form-label">Hasło:</label>
                             <input type="password" id="password" name="password" class="form-control form-control-sm">
                             <div class="form-actions">
-                                <button type="submit" class="btn btn-secondary">Log in</button>
+                                <button type="submit" class="btn btn-secondary">Zaloguj się</button>
                             </div>
                             <div th:if="${param.error}" class="alert alert-error">
-                                Invalid Username or password!
+                                Zły e-mail lub hasło!
                             </div>
                         </fieldset>
                     </form>
@@ -39,7 +39,7 @@
             </div>
             <div class="col-lg-4">
                 <div class="register">
-                    <legend>Register</legend>
+                    <legend>Rejestracja</legend>
                     <form th:action="@{/registerProcces}" method="post" th:object="${user}">
 
                         <div>
@@ -53,14 +53,14 @@
                         </div>
 
                         <div>
-                            <label class="form-label">Password:</label>
+                            <label class="form-label">Hasło</label>
                             <input type="password" th:field="*{password}" class="form-control form-control-sm" required minlength="8" maxlength="20">
                         </div>
                         <div th:if="${exist != null}" class="alert alert-error">
                             <p th:text="${exist}"></p>
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-secondary">Sign Up</button>
+                            <button type="submit" class="btn btn-secondary">Zarejestruj się</button>
                         </div>
                     </form>
                 </div>
@@ -71,7 +71,7 @@
 
     <hr class="line">
     <p>
-        MyPage jest miejscem, gdzie razem z przyjaciółmi możesz kontrolować wasze wydatki. Już nie musisz szukać
+        MatesFunds jest miejscem, gdzie razem z przyjaciółmi możesz kontrolować wasze wydatki. Już nie musisz szukać
         dokładnej wartości w portfelu, wystarczy, że dodasz kwotę do bilansu grupowego, a MyPage obliczy saldo dla każdego
         użytkownika za ciebie!
     </p>
