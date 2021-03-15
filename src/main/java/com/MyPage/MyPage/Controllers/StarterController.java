@@ -20,7 +20,7 @@ public class StarterController {
 
     @GetMapping("/")
     public String index(){
-        return "index";
+        return "redirect:/login";
     }
 
     @GetMapping("/login")

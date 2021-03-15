@@ -27,11 +27,11 @@
                             <input type="text" id="username" name="username" class="form-control form-control-sm">
                             <label for="password" class="form-label">Password:</label>
                             <input type="password" id="password" name="password" class="form-control form-control-sm">
-                            <div th:if="${param.error}" style="color: red;">
-                                Invalid Username or password!
-                            </div>
                             <div class="form-actions">
-                                <button type="submit" class="btn btn-primary">Log in</button>
+                                <button type="submit" class="btn btn-secondary">Log in</button>
+                            </div>
+                            <div th:if="${param.error}" class="alert alert-error">
+                                Invalid Username or password!
                             </div>
                         </fieldset>
                     </form>
@@ -60,7 +60,7 @@
                             <p th:text="${exist}"></p>
                         </div>
                         <div>
-                            <button type="submit" class="btn btn-primary">Sign Up</button>
+                            <button type="submit" class="btn btn-secondary">Sign Up</button>
                         </div>
                     </form>
                 </div>
@@ -69,6 +69,12 @@
         </div>
     </div>
 
+    <hr class="line">
+    <p>
+        MyPage jest miejscem, gdzie razem z przyjaciółmi możesz kontrolować wasze wydatki. Już nie musisz szukać
+        dokładnej wartości w portfelu, wystarczy, że dodasz kwotę do bilansu grupowego, a MyPage obliczy saldo dla każdego
+        użytkownika za ciebie!
+    </p>
 
 </div>
 

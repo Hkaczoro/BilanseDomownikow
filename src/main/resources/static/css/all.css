@@ -1,16 +1,24 @@
-html, body {
+html, body{
     background-color:#e4e4e4;
     font-family: 'Nunito', sans-serif;
     font-weight: 600;
+    background-image: url("/images/pexels-tima-miroshnichenko-5686123 2.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
 }
 
 .container {
-    background-color: rgb(185, 185, 185);
-    border-left: 5px solid #02047a;
-    height: 100vh;
-    border-radius: 1%;
-    box-shadow: 10px 5px 7px grey;
+    background-color: rgba(0,0,0, 0.4);
+    height: 50%;
+    margin-top: 20vh;
+    color: white;
+    padding: 30px;
 }
+
+
 
 label {
     text-transform: uppercase;
@@ -28,5 +36,10 @@ legend {
 button {
     text-transform: uppercase;
     width: 100%;
+}
+
+p {
+    font-size: 30px;
+    text-align: center;
 }
 

@@ -120,6 +120,8 @@ public class UserController {
         try {
             User loogedUser = userRepository.findByEmail(principal.getName());
             float f = Float.parseFloat(inputValue);
+            System.out.println(f);
+            System.out.println(list.length);
 
             if (list.length != 0) {
                 float trueValue = f / list.length;

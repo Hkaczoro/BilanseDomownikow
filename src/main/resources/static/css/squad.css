@@ -1,0 +1,24 @@
+html, body {
+    background-color:#e4e4e4;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 600;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.all {
+    margin-top: 60px;
+}
+
+h1 {
+    text-align: center;
+}
+
+.return {
+    margin-top: 8px;
+    left: 0;
+}
