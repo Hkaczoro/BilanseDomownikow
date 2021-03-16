@@ -5,5 +5,5 @@ Link: http://matesfunds-env.eba-ptvvxrts.us-east-2.elasticbeanstalk.com
 
 Przykładowe dane do logowania:
 - e-mail: User1@test.pl   hasło: zaq12wsx
-- e-mail: User1@test.pl   hasło: 12345678
-- e-mail: User1@test.pl   hasło: 12345678
+- e-mail: User2@test.pl   hasło: 12345678
+- e-mail: User3@test.pl   hasło: 12345678
